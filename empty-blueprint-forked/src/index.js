@@ -1,29 +1,24 @@
-const generateForm = document.querySelector("#generate_form");
-const generateInput = generateForm.querySelector("input");
-const guessForm = document.querySelector("#guess_form");
-const guessInput = guessForm.querySelector("input");
-const greeting = document.querySelector("#greeting");
-const savedRangeNumber = localStorage.getItem("range");
+const form = document.querySelector("form");
+const generateForm = form.querySelector(".generate_form");
+const generateInput = generateForm.querySelector("#generate_input");
+const guessForm = form.querySelector(".guess_form");
+const guessInput = guessForm.querySelector("#guess_input");
+const savedRangeNumber = JSON.parse(localStorage.getItem("range"));
 
-function onGenerateSubmit(event) {
+function onSubmitInputs(event) {
   event.preventDefault();
   const rangeNumber = generateInput.value;
-  localStorage.setItem("range", rangeNumber);
-}
-function onGuessNumberSubmit(event) {
-  event.preventDefault();
-  const guessNumber = guessInput.value;
-  onGreeting(guessNumber);
+  const guessNumber = parseInt(guessForm.value);
+
+  if (rangeNumber === "" || guessNumber === "") {
+    return;
+  }
+  const randomNumber = Math.ceil(Math.random() * rangeNumber);
+  const greeting = document.querySelector("#greeting");
+  greeting.innerHTML = `
+  you choose: ${guessNumber},
+  the machine chose: ${randomNumber}. <br/>
+  <strong>${guessNumber === randomNumber ? "You won!" : "You lost!"}</strong>`;
 }
 
-function onGreeting(guessNumber) {
-  const randomNumber = Math.floor(Math.random() * (guessNumber - 0) + 0);
-  greeting.innerText = `You chose: ${guessNumber}, the machinec chose: ${randomNumber}`;
-  greeting.insertAdjacentText(
-    "beforeend",
-    randomNumber === guessNumber ? `You lost!` : `You Win`
-  );
-}
-
-generateForm.addEventListener("submit", onGenerateSubmit);
-guessForm.addEventListener("submit", onGuessNumberSubmit);
+form.addEventListener("submit", onSubmitInputs);

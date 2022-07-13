@@ -8,16 +8,18 @@
   <body>
     <h1>Random Number Game</h1>
 
-    <form id="generate_form">
-      <span> Generate a number between 0 and</span>
-      <input required type="number" />
+    <form>
+      <div class="generate_form">
+        <span> Generate a number between 0 and</span>
+        <input id="generate_input" required type="number" />
+      </div>
+      <div class="guess_form">
+        <span>Guess the number:</span>
+        <input id="guess_input" ßrequired min="0" type="number" />
+        <button>play!</button>
+      </div>
     </form>
-    <form id="guess_form">
-      <span>Guess the number:</span>
-      <input required min="0" type="number" />
-      <button>play!</button>
-    </form>
-    <div id="greeting" class="hidden"></div>
+    <div id="greeting"></div>
     <script src="src/index.js"></script>
   </body>
 </html>
