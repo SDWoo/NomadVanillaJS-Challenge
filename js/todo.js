@@ -13,7 +13,6 @@ function deleteToDo(e) {
   const li = e.target.parentElement;
 
   toDos = toDos.filter((toDo) => toDo.id !== parseInt(li.id));
-  console.log(toDos);
   saveToDos(toDos);
   li.remove();
 }
@@ -32,6 +31,7 @@ function paintToDo(newTodo) {
   li.appendChild(button);
   toDoList.appendChild(li);
 }
+
 function handleToDoSubmit(event) {
   event.preventDefault();
   const newTodo = toDoInput.value;
